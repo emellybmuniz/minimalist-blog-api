@@ -17,6 +17,8 @@
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Pré-requisitos](#-pré-requisitos)
 - [Instalação](#-instalação)
+- [Configuração do .env e Banco](#-configuração-do-env-e-banco)
+- [Deploy no Render](#-deploy-no-render)
 - [API/Funcionalidades Avançadas](#-apifuncionalidades-avançadas)
 - [Contribuição](#-contribuição)
 - [Licença](#-licença)
@@ -108,10 +110,69 @@ $ cd minimalist-blog-api
 # 3. Instale as dependências
 $ npm install
 # 4. Inicie o servidor
-$ npm run start
+$ npm run dev
 ```
 
 **Veja a Documentação da API**: http://localhost:3000/api-docs
+
+## 🧩 Configuração do .env e Banco
+
+Crie um arquivo `.env` com base no `.env.example`.
+
+```bash
+$ cp .env.example .env
+```
+
+Se você já tiver uma string de conexão completa (Render/Neon/Supabase), basta preencher:
+
+- `DATABASE_URL` (ex: `postgres://user:pass@host:5432/db`)
+
+Caso prefira as variáveis separadas, use:
+
+- `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
+
+Depois, crie o banco relacional no PostgreSQL com o nome definido em `DB_NAME`.
+Se estiver usando pgAdmin, basta criar um novo banco com o nome desejado.
+
+Se utilizar migrações:
+
+```bash
+$ npm run migration:run
+```
+
+## ☁️ Deploy no Render
+
+1. Crie uma conta no Render.com.
+2. Clique em **New +** e selecione **Web Service**.
+3. Conecte seu repositório do GitHub.
+
+**Build Command**:
+
+```
+npm install && npm run build
+```
+
+**Start Command**:
+
+```
+npm start
+```
+
+**Environment Variables**:
+
+- `NODE_ENV=production`
+- `DATABASE_URL=<sua_string_de_conexao>`
+
+### Sobre o banco de dados
+
+- **Render PostgreSQL**: muito prático, porém o plano gratuito expira em 90 dias.
+- **Neon/Supabase**: alternativas gratuitas que não expiram; indicadas para portfólio.
+
+Depois do deploy, seu Swagger ficará disponível em:
+
+```
+https://seu-app.onrender.com/api-docs
+```
 
 ## 🔌 API/Funcionalidades Avançadas
 
