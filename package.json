@@ -16,7 +16,8 @@
     "start": "node build/index.js",
     "dev": "ts-node src/index.ts",
     "typeorm": "typeorm",
-    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/data-source.ts"
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/data-source.ts",
+    "migration:run:prod": "node ./node_modules/typeorm/cli.js migration:run -d build/data-source.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
