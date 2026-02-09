@@ -10,6 +10,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const config: any = {
   type: "postgres",
   synchronize: false,
+  migrationsRun: true,
   logging: true,
   entities: [User, Post, Category],
   migrations: [isProduction ? "build/migration/*.js" : "src/migration/*.ts"],
