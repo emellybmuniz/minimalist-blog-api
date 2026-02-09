@@ -12,6 +12,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (_req, res) => {
+  res.redirect("/api-docs");
+});
+
+const swaggerServerUrl =
+  process.env.RENDER_EXTERNAL_URL ||
+  process.env.BASE_URL ||
+  "http://localhost:3000";
+
 const swaggerSpec: OpenAPIV3.Document = {
   openapi: "3.0.0",
   info: {
@@ -20,7 +29,7 @@ const swaggerSpec: OpenAPIV3.Document = {
   },
   servers: [
     {
-      url: "http://localhost:3000",
+      url: swaggerServerUrl,
     },
   ],
   components: {
