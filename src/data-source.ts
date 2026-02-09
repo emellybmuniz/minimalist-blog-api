@@ -12,7 +12,7 @@ const config: any = {
   synchronize: false,
   logging: true,
   entities: [User, Post, Category],
-  migrations: ["src/migration/*.ts"],
+  migrations: [isProduction ? "build/migration/*.js" : "src/migration/*.ts"],
   subscribers: [],
 };
 
