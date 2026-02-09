@@ -3,7 +3,6 @@
 ![GitHub License](https://img.shields.io/github/license/emellybmuniz/minimalist-blog-api)
 ![GitHub language count](https://img.shields.io/github/languages/count/emellybmuniz/minimalist-blog-api)
 ![GitHub last commit](https://img.shields.io/github/last-commit/emellybmuniz/minimalist-blog-api)
-![GitHub repo size](https://img.shields.io/github/repo-size/emellybmuniz/minimalist-blog-api)
 ![Project Status](https://img.shields.io/badge/Status%20-%20Finalizado%20-%20%234BC21E)
 ![GitHub Stars](https://img.shields.io/github/stars/emellybmuniz/minimalist-blog-api?style=social)
 
