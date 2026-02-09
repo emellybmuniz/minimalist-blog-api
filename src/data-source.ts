@@ -5,20 +5,26 @@ import { User } from "./entity/User";
 import { Post } from "./entity/Post";
 import { Category } from "./entity/Category";
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
-export const AppDataSource = new DataSource({
+const config: any = {
   type: "postgres",
-  url: process.env.DATABASE_URL,
-  host: process.env.DB_HOST || "localhost",
-  port: parseInt(process.env.DB_PORT || "5432"),
-  username: process.env.DB_USER || "postgres",
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME || "mydatabase",
   synchronize: false,
   logging: true,
   entities: [User, Post, Category],
   migrations: ["src/migration/*.ts"],
   subscribers: [],
-  ssl: isProduction ? { rejectUnauthorized: false } : false, // To Render
-});
+};
+
+if (process.env.DATABASE_URL) {
+  config.url = process.env.DATABASE_URL;
+  config.ssl = { rejectUnauthorized: false };
+} else {
+  config.host = process.env.DB_HOST || "localhost";
+  config.port = parseInt(process.env.DB_PORT || "5432");
+  config.username = process.env.DB_USER || "postgres";
+  config.password = process.env.DB_PASSWORD;
+  config.database = process.env.DB_NAME || "mydatabase";
+}
+
+export const AppDataSource = new DataSource(config);
