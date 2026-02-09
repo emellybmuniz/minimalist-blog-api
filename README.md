@@ -1,11 +1,10 @@
 # Minimalist Blog API
 
-![GitHub License](https://img.shields.io/github/license/emellybmuniz/minimalist-blog)
-![GitHub language count](https://img.shields.io/github/languages/count/emellybmuniz/minimalist-blog)
-![GitHub last commit](https://img.shields.io/github/last-commit/emellybmuniz/minimalist-blog)
-![GitHub repo size](https://img.shields.io/github/repo-size/emellybmuniz/minimalist-blog)
+![GitHub License](https://img.shields.io/github/license/emellybmuniz/minimalist-blog-api)
+![GitHub language count](https://img.shields.io/github/languages/count/emellybmuniz/minimalist-blog-api)
+![GitHub last commit](https://img.shields.io/github/last-commit/emellybmuniz/minimalist-blog-api)
 ![Project Status](https://img.shields.io/badge/Status%20-%20Finalizado%20-%20%234BC21E)
-![GitHub Stars](https://img.shields.io/github/stars/emellybmuniz/minimalist-blog?style=social)
+![GitHub Stars](https://img.shields.io/github/stars/emellybmuniz/minimalist-blog-api?style=social)
 
 ## API Backend para um blog minimalista, desenvolvida para gerenciar autores, publicações e categorias com persistência robusta em banco de dados relacional PostgreSQL.
 
@@ -35,7 +34,7 @@ O objetivo principal é demonstrar a implementação de relacionamentos complexo
 ## 📂 Estrutura de Diretórios
 
 ```bash
-📦 minimalist-blog/
+📦 minimalist-blog-api/
 ├── src/
 │   ├── controllers/       # Camada de controle (HTTP)
 │   ├── entity/            # Definição das tabelas (User, Post, Category)
