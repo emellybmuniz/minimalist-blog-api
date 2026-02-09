@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+node_modules/
+build/
+dist/
+tmp/
+temp/
+.env
+coverage/
+.cache/
+*.log
+steps.md
+task.md
+task2.md
