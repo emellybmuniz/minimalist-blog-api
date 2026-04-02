@@ -1,5 +1,6 @@
 import "typeorm";
 import { Post } from "./Post";
+import { Like } from "./Likes";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -28,5 +29,8 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Post, (post) => post.author)
   posts: Post[]; // bi-directional relationship
+
+  @OneToMany(() => Like, (like) => like.user)
+  likes: Like[];
 }
 

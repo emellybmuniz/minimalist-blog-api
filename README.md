@@ -54,6 +54,7 @@ O objetivo principal é demonstrar a implementação de relacionamentos complexo
 ### 🎯 **Gestão de Conteúdo (CRUD)**
 
 - Criação e gerenciamento de Autores (Users) e Artigos (Posts).
+- Sistema de controle de Likes.
 - Sistema de publicação (rascunho vs publicado).
 - Utilização do TypeORM para abstração do SQL.
 
@@ -172,14 +173,16 @@ https://seu-app.onrender.com/api-docs
 
 ### Endpoints Disponíveis:
 
-| Método | Endpoint          | Descrição                         | Parâmetros                |
-| ------ | ----------------- | --------------------------------- | ------------------------- |
-| GET    | `/api/users`      | Lista todos os usuários           | -                         |
-| POST   | `/api/users`      | Cria um novo usuário              | `{ name, email }`         |
-| GET    | `/api/posts`      | Lista posts (com filtro opcional) | `?title=algo`             |
-| POST   | `/api/posts`      | Cria um novo post                 | `{ title, body, userId }` |
-| GET    | `/api/categories` | Lista todas as categorias         | -                         |
-| POST   | `/api/categories` | Cria uma nova categoria           | `{ name }`                |
+| Método | Endpoint                    | Descrição                              | Parâmetros                |
+| ------ | --------------------------- | -------------------------------------- | ------------------------- |
+| GET    | `/api/users`                | Lista todos os usuários                | -                         |
+| POST   | `/api/users`                | Cria um novo usuário                   | `{ name, email }`         |
+| GET    | `/api/posts`                | Lista posts (com filtro opcional)      | `?title=algo`             |
+| POST   | `/api/posts`                | Cria um novo post                      | `{ title, body, userId }` |
+| POST   | `/api/posts/{postId}/like`  | Curtir ou descurtir um post (toggle)   | `{userId} (body)`         |
+| GET    | `/api/posts/{postId}/likes` | Retorna a quantidade de likes do post  | -                         |
+| GET    | `/api/categories`           | Lista todas as categorias              | -                         |
+| POST   | `/api/categories`           | Cria uma nova categoria                | `{ name }`                |
 
 ## 🤝 Contribuição
 

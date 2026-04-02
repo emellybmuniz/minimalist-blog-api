@@ -3,6 +3,7 @@ import "dotenv/config";
 import { DataSource } from "typeorm";
 import { User } from "./entity/User";
 import { Post } from "./entity/Post";
+import { Like } from "./entity/Likes";
 import { Category } from "./entity/Category";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -12,14 +13,17 @@ const config: any = {
   synchronize: false,
   migrationsRun: true,
   logging: true,
-  entities: [User, Post, Category],
+  entities: [User, Post, Category, Like],
   migrations: [isProduction ? "build/migration/*.js" : "src/migration/*.ts"],
   subscribers: [],
 };
 
 if (process.env.DATABASE_URL) {
   config.url = process.env.DATABASE_URL;
-  config.ssl = { rejectUnauthorized: false };
+
+  if (isProduction) {
+    config.ssl = { rejectUnauthorized: false };
+  }
 } else {
   config.host = process.env.DB_HOST || "localhost";
   config.port = parseInt(process.env.DB_PORT || "5432");
