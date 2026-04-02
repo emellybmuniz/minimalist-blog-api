@@ -4,6 +4,7 @@ import { AppDataSource } from "../data-source";
 import { Post } from "../entity/Post";
 import { Category } from "../entity/Category";
 import { User } from "../entity/User";
+import { Like } from "../entity/Likes";
 
 export class PostController {
   private postService: PostService;
@@ -12,10 +13,12 @@ export class PostController {
     const postRepository = AppDataSource.getRepository(Post);
     const categoryRepository = AppDataSource.getRepository(Category);
     const userRepository = AppDataSource.getRepository(User);
+    const likeRepository = AppDataSource.getRepository(Like);
     this.postService = new PostService(
       postRepository,
       categoryRepository,
       userRepository,
+      likeRepository,
     );
   }
 
@@ -23,6 +26,18 @@ export class PostController {
     try {
       const posts = await this.postService.getAllPosts();
       res.status(200).json(posts);
+    } catch (error) {
+      res.status(500).json({
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
+  }
+
+  async getPostLikes(req: Request, res: Response): Promise<void> {
+    try {
+      const postId = req.params.id;
+      const likesCount = await this.postService.getPostLikes(postId as string);
+      res.status(200).json({ likes: likesCount });
     } catch (error) {
       res.status(500).json({
         error: error instanceof Error ? error.message : "Unknown error",

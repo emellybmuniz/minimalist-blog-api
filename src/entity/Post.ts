@@ -10,6 +10,7 @@ import {
 } from "typeorm";
 import { User } from "./User";
 import { Category } from "./Category";
+import { Like } from "./Likes";
 
 @Entity()
 export class Post extends BaseEntity {
@@ -37,4 +38,7 @@ export class Post extends BaseEntity {
   @ManyToMany(() => Category, (category) => category.posts)
   @JoinTable()
   categories: Category[]; // bi-directional relationship
+
+  @ManyToMany(() => Like, (like) => like.post)
+  likes: Like[]; // bi-directional relationship
 }

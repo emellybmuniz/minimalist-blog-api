@@ -4,12 +4,14 @@ import { Repository } from "typeorm";
 import { Post } from "../entity/Post";
 import { User } from "../entity/User";
 import { Category } from "../entity/Category";
+import { Like } from "../entity/Likes";
 
 export class PostService {
   constructor(
     private postRepository: Repository<Post>,
     private categoryRepository: Repository<Category>,
     private userRepository?: Repository<User>,
+    private likeRepository?: Repository<Like>,
   ) {}
 
   async registerPost(
@@ -69,6 +71,16 @@ export class PostService {
       relations: { author: true, categories: true },
       order: { id: "ASC" },
     });
+  }
+
+  async getPostLikes(postId: string): Promise<{ likes: number }> {
+    if (!this.likeRepository) {
+      throw new Error("Like repository not initialized");
+    }
+    const likesCount = await this.likeRepository.count({
+      where: { post: { id: postId } },
+    });
+    return { likes: likesCount };
   }
 
   async getPostsByAuthor(authorId: string): Promise<Post[]> {

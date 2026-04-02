@@ -6,6 +6,10 @@ const postController = new PostController();
 
 router.get("/", (req, res) => postController.getAllPosts(req, res));
 
+router.get("/:id/likes", (req, res) => 
+  postController.getPostLikes(req, res)
+);
+
 router.get("/author/:authorId", (req, res) =>
   postController.getPostsByAuthor(req, res),
 );

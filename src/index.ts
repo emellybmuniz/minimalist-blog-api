@@ -6,6 +6,7 @@ import { AppDataSource } from "./data-source";
 import userRoutes from "./routes/userRoutes";
 import postRoutes from "./routes/postRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
+import likeRoutes from "./routes/likeRoutes";
 
 const app = express();
 
@@ -73,6 +74,14 @@ const swaggerSpec: OpenAPIV3.Document = {
             type: "array",
             items: { $ref: "#/components/schemas/Category" },
           },
+        },
+      },
+      Like: {
+        type: "object",
+        properties: {
+          id: { type: "string", description: "Like UUID" },
+          userId: { type: "string" },
+          postId: { type: "string" },
         },
       },
     },
@@ -365,7 +374,55 @@ const swaggerSpec: OpenAPIV3.Document = {
         },
       },
     },
-  },
+    "/api/posts/{postId}/like": {
+      post: {
+        tags: ["Likes"],
+        summary: "Like a post",
+        parameters: [
+          {
+            name: "postId",
+            in: "path",
+            required: true,
+            schema: { type: "string" },
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  userId: { type: "string", description: "UUID of the user liking the post" },
+                },
+                required: ["userId"],
+              },
+            },
+          },
+        },
+        responses: {
+          "200": { description: "Post liked" },
+        },
+      },
+    },
+    "/api/posts/{postId}/likes": {
+      get: {
+        tags: ["Likes"],
+        summary: "Get like count for a post",
+        parameters: [
+          {
+            name: "postId",
+            in: "path",
+            required: true,
+            schema: { type: "string" },
+          },
+        ],
+        responses: {
+          "200": { description: "Like count" },
+        },
+      },
+    },
+  }
 };
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -373,6 +430,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api", likeRoutes);
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
