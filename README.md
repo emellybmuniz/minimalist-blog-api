@@ -6,7 +6,7 @@
 ![Project Status](https://img.shields.io/badge/Status%20-%20Finalizado%20-%20%234BC21E)
 ![GitHub Stars](https://img.shields.io/github/stars/emellybmuniz/minimalist-blog-api?style=social)
 
-## API Backend para um blog minimalista, desenvolvida para gerenciar autores, publicações e categorias com persistência robusta em banco de dados relacional PostgreSQL.
+## API Backend para um blog minimalista, desenvolvida para gerenciar autores, publicações e categorias com persistência em banco de dados relacional PostgreSQL.
 
 ### 📋 Índice
 
@@ -161,11 +161,6 @@ npm start
 
 - `NODE_ENV=production`
 - `DATABASE_URL=<sua_string_de_conexao>`
-
-### Sobre o banco de dados
-
-- **Render PostgreSQL**: muito prático, porém o plano gratuito expira em 90 dias.
-- **Neon/Supabase**: alternativas gratuitas que não expiram; indicadas para portfólio.
 
 Depois do deploy, seu Swagger ficará disponível em:
 
