@@ -16,6 +16,16 @@ app.get("/", (_req, res) => {
   res.redirect("/api-docs");
 });
 
+app.get("/healthcheck", async (_req, res) => {
+  try {
+    await AppDataSource.query("SELECT 1");
+    res.status(200).json({ status: "ok", message: "Database connection is alive." });
+  } catch (error) {
+    console.error("Healthcheck falhou:", error);
+    res.status(500).json({ status: "error", message: "Database connection failed." });
+  }
+});
+
 const swaggerServerUrl =
   process.env.RENDER_EXTERNAL_URL ||
   process.env.BASE_URL ||
@@ -78,6 +88,16 @@ const swaggerSpec: OpenAPIV3.Document = {
     },
   },
   paths: {
+    "/healthcheck": {
+      get: {
+        tags: ["System"],
+        summary: "Healthcheck / Keep-Alive para o banco de dados",
+        responses: {
+          "200": { description: "Database is alive" },
+          "500": { description: "Database connection failed" }
+        }
+      }
+    },
     // populate with endpoints
     "/api/users": {
       get: {
